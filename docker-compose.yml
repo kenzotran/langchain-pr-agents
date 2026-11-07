@@ -1,0 +1,26 @@
+# docker compose up --build   ->  API on http://localhost:8000, PostgreSQL + pgvector on 5432
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: agents
+      POSTGRES_PASSWORD: agents
+      POSTGRES_DB: agents
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agents"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+  api:
+    build: .
+    env_file: [.env]
+    environment:
+      DATABASE_URL: postgresql://agents:agents@db:5432/agents
+    ports: ["8000:8000"]
+    depends_on:
+      db: {condition: service_healthy}
+    restart: unless-stopped
+volumes:
+  pgdata:

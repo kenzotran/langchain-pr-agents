@@ -1,0 +1,4 @@
+row_id,topic,category,status,description,poster_candidates
+1,Fresher AI program is open,fresher_ai,planned,"Announce the Fresher AI program: training in RAG, LLMOps and agentic AI with LangGraph.",data/posters/template_a.png;data/posters/template_b.png
+2,Go Japan track,go_japan,approved,"The Go Japan track prepares engineers to work with Japanese clients, including Japanese language training.",
+3,Campus talk at a new university,campus_talk,planned,Campus talk about careers at FPT Software.,
